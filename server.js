@@ -3,6 +3,7 @@ console.log("May Node be with You");
 
 //this is how we use express by requiring express
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
 
 //create a server that browsers can connect to using listen method
