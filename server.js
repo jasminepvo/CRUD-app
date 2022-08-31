@@ -30,3 +30,10 @@ app.get("/", (req, res) => {
 app.post("/quotes", (req, res) => {
 	console.log(req.body);
 });
+
+//CONNECT TO MONGODB
+const MongoClient = require("mongodb").MongoClient;
+
+MongoClient.connect("mongodb-connection-string", (err, client) => {
+	//do something
+});
