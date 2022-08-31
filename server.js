@@ -40,5 +40,6 @@ MongoClient.connect(
 )
 	.then((client) => {
 		console.log("Connected to Database");
+		const db = client.db("star-wars-quotes");
 	})
 	.catch((error) => console.error(error));
