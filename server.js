@@ -28,7 +28,12 @@ app.get("/", (req, res) => {
 //CREATE
 //Send a POST request through a form
 app.post("/quotes", (req, res) => {
-	console.log(req.body);
+	quotesCollection
+		.insertOne(req.body)
+		.then((result) => {
+			console.log(result);
+		})
+		.catch((error) => console.error(error));
 });
 
 //CONNECT TO MONGODB
@@ -44,6 +49,7 @@ MongoClient.connect(
 		app.use();
 		app.get();
 		app.post();
-		app.listen;
+		app.listen();
+		const quotesCollection = db.collection("quotes");
 	})
 	.catch((error) => console.error(error));
