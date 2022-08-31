@@ -10,6 +10,10 @@ app.listen(3000, function () {
 	console.log("listening on 3000");
 });
 
+//Body-parser is middleware, they help to tidy up the request object before we use them
+//Express lets us use middleware with the use method
+app.use(bodyParse.urlencoded({ extended: true }));
+
 //handle the get request with the get method
 //app.get(endpoint,callback)
 //endpoint is /
@@ -23,5 +27,5 @@ app.get("/", (req, res) => {
 //CREATE
 //Send a POST request through a form
 app.post("/quotes", (req, res) => {
-	console.log("Lessssggooooooo!");
+	console.log(req.body);
 });
