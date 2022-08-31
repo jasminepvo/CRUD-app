@@ -18,5 +18,10 @@ app.get("/", (req, res) => {
 	//__dirname is the current directory you're in
 	res.sendFile(__dirname + "/index.html");
 });
-
 //serve up an index.html page back to the browser using sendFile method provided by the res object
+
+//CREATE
+//Send a POST request through a form
+app.post("/quotes", (req, res) => {
+	console.log("Lessssggooooooo!");
+});
