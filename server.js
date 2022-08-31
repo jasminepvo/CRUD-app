@@ -12,7 +12,7 @@ app.listen(3000, function () {
 
 //Body-parser is middleware, they help to tidy up the request object before we use them
 //Express lets us use middleware with the use method
-app.use(bodyParse.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //handle the get request with the get method
 //app.get(endpoint,callback)
