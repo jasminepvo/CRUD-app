@@ -35,7 +35,7 @@ app.post("/quotes", (req, res) => {
 const MongoClient = require("mongodb").MongoClient;
 
 MongoClient.connect(
-	"mongodb+srv://yoda:<starwars1>@cluster0.n5aqihu.mongodb.net/?retryWrites=true&w=majority",
+	"mongodb+srv://yoda:starwars1@cluster0.n5aqihu.mongodb.net/?retryWrites=true&w=majority",
 	(err, client) => {
 		if (err) return console.error(err);
 		console.log("Connected to Database");
