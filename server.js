@@ -77,7 +77,21 @@ MongoClient.connect(
 		});
 
 		app.put("/quotes", (req, res) => {
-			console.log(req.body);
+			quotesCollection
+				.findOneAndUpdate(
+					{ name: "Yoda" },
+					{
+						$set: {
+							name: req.body.name,
+							quote: req.body.quote,
+						},
+					},
+					options
+				)
+				.then((result) => {
+					/*..*/
+				})
+				.catch((error) => console.error(error));
 		});
 
 		app.listen();
