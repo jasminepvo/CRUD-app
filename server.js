@@ -86,7 +86,10 @@ MongoClient.connect(
 							quote: req.body.quote,
 						},
 					},
-					options
+					{
+						//upsert = insert document if no documents can be updated so if no yoda quotes exit, create a new darth vader quote
+						upsert: true,
+					}
 				)
 				.then((result) => {
 					/*..*/
