@@ -27,29 +27,33 @@ app.get("/", (req, res) => {
 
 //CREATE
 //Send a POST request through a form
+// app.post("/quotes", (req, res) => {
+// 	quotesCollection
+// 		.insertOne(req.body)
+// 		.then((result) => {
+// 			console.log(result);
+// 		})
+// 		.catch((error) => console.error(error));
+// });
+
 app.post("/quotes", (req, res) => {
-	quotesCollection
-		.insertOne(req.body)
-		.then((result) => {
-			console.log(result);
-		})
-		.catch((error) => console.error(error));
+	console.log(req.body);
 });
 
 //CONNECT TO MONGODB
-const MongoClient = require("mongodb").MongoClient;
+// const MongoClient = require("mongodb").MongoClient;
 
-MongoClient.connect(
-	"mongodb+srv://yoda:starwars1@cluster0.n5aqihu.mongodb.net/?retryWrites=true&w=majority",
-	{ useUnifiedTopology: true }
-)
-	.then((client) => {
-		console.log("Connected to Database");
-		const db = client.db("star-wars-quotes");
-		const quotesCollection = db.collection("quotes");
-		app.use();
-		app.get();
-		app.post();
-		app.listen();
-	})
-	.catch((error) => console.error(error));
+// MongoClient.connect(
+// 	"mongodb+srv://yoda:starwars1@cluster0.n5aqihu.mongodb.net/?retryWrites=true&w=majority",
+// 	{ useUnifiedTopology: true }
+// )
+// 	.then((client) => {
+// 		console.log("Connected to Database");
+// 		const db = client.db("star-wars-quotes");
+// 		const quotesCollection = db.collection("quotes");
+// 		app.use();
+// 		app.get();
+// 		app.post();
+// 		app.listen();
+// 	})
+// 	.catch((error) => console.error(error));
