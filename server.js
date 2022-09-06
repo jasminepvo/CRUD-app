@@ -27,18 +27,18 @@ app.get("/", (req, res) => {
 
 //CREATE
 //Send a POST request through a form
-// app.post("/quotes", (req, res) => {
-// 	quotesCollection
-// 		.insertOne(req.body)
-// 		.then((result) => {
-// 			console.log(result);
-// 		})
-// 		.catch((error) => console.error(error));
-// });
-
 app.post("/quotes", (req, res) => {
-	console.log(req.body);
+	quotesCollection
+		.insertOne(req.body)
+		.then((result) => {
+			console.log(result);
+		})
+		.catch((error) => console.error(error));
 });
+
+// app.post("/quotes", (req, res) => {
+// 	console.log(req.body);
+// });
 
 //CONNECT TO MONGODB
 const MongoClient = require("mongodb").MongoClient;
