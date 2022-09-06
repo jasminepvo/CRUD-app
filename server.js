@@ -44,7 +44,10 @@ MongoClient.connect(
 		const quotesCollection = db.collection("quotes");
 		//tell express we're using ejs as the template engine
 		app.set("view engine", "ejs");
-		app.use(bodyParser.urlencoded({ extended: true }));
+		app.use(
+			bodyParser.urlencoded({ extended: true }),
+			express.static("public")
+		);
 		app.get("/", (req, res) => {
 			//__dirname is the current directory you're in
 			// res.sendFile(__dirname + "/index.html");
