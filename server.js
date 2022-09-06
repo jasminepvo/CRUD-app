@@ -79,7 +79,7 @@ MongoClient.connect(
 		app.put("/quotes", (req, res) => {
 			quotesCollection
 				.findOneAndUpdate(
-					{ name: "Yoda" },
+					{ name: "yoda" },
 					{
 						$set: {
 							name: req.body.name,
