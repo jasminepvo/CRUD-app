@@ -45,7 +45,14 @@ MongoClient.connect(
 		app.use(bodyParser.urlencoded({ extended: true }));
 		app.get("/", (req, res) => {
 			//__dirname is the current directory you're in
-			res.sendFile(__dirname + "/index.html");
+			// res.sendFile(__dirname + "/index.html");
+			db.collection("quotes")
+				.find()
+				.toArray()
+				.then((results) => {
+					console.log(results);
+				})
+				.catch((error) => console.error(error));
 		});
 		app.post("/quotes", (req, res) => {
 			quotesCollection
