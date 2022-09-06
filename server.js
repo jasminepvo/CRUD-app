@@ -55,6 +55,7 @@ MongoClient.connect(
 		// -------------------------------
 		// Routes
 		// -------------------------------
+		// CREATE
 		app.get("/", (req, res) => {
 			//__dirname is the current directory you're in
 			// res.sendFile(__dirname + "/index.html");
@@ -67,6 +68,7 @@ MongoClient.connect(
 				.catch((error) => console.error(error));
 		});
 
+		// READ
 		app.post("/quotes", (req, res) => {
 			quotesCollection
 				.insertOne(req.body)
@@ -76,6 +78,7 @@ MongoClient.connect(
 				.catch((error) => console.error(error));
 		});
 
+		// UPDATE
 		app.put("/quotes", (req, res) => {
 			quotesCollection
 				.findOneAndUpdate(
@@ -94,6 +97,14 @@ MongoClient.connect(
 				.then((result) => {
 					res.json("Success");
 				})
+				.catch((error) => console.error(error));
+		});
+
+		// DELETE
+		app.delete("/quotes", (req, res) => {
+			quotesCollection
+				.deleteOne(query, options)
+				.then((result) => {})
 				.catch((error) => console.error(error));
 		});
 
