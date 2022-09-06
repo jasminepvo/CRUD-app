@@ -13,16 +13,16 @@ app.listen(3000, function () {
 
 //Body-parser is middleware, they help to tidy up the request object before we use them
 //Express lets us use middleware with the use method
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 //handle the get request with the get method
 //app.get(endpoint,callback)
 //endpoint is /
 //callback tells the server what to do when the requested endpoint matches the endpoint stated and takes two objects: request and response
-app.get("/", (req, res) => {
-	//__dirname is the current directory you're in
-	res.sendFile(__dirname + "/index.html");
-});
+// app.get("/", (req, res) => {
+// 	//__dirname is the current directory you're in
+// 	res.sendFile(__dirname + "/index.html");
+// });
 //serve up an index.html page back to the browser using sendFile method provided by the res object
 
 //CREATE
@@ -42,6 +42,8 @@ MongoClient.connect(
 		console.log("Connected to Database");
 		const db = client.db("star-wars-quotes");
 		const quotesCollection = db.collection("quotes");
+		//tell express we're using ejs as the template engine
+		app.set("view engine", "ejs");
 		app.use(bodyParser.urlencoded({ extended: true }));
 		app.get("/", (req, res) => {
 			//__dirname is the current directory you're in
@@ -50,7 +52,7 @@ MongoClient.connect(
 				.find()
 				.toArray()
 				.then((results) => {
-					console.log(results);
+					res.render("index.ejs", { quotes: results });
 				})
 				.catch((error) => console.error(error));
 		});
