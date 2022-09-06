@@ -42,9 +42,19 @@ MongoClient.connect(
 		console.log("Connected to Database");
 		const db = client.db("star-wars-quotes");
 		const quotesCollection = db.collection("quotes");
+
+		// -------------------------------
+		// Middlewares
+		// -------------------------------
 		//tell express we're using ejs as the template engine
 		app.set("view engine", "ejs");
-		app.use(bodyParser.json(), express.static("public"));
+		app.use(bodyParser.urlencoded({ extended: true }));
+		app.use(bodyParser.json());
+		app.use(express.static("public"));
+
+		// -------------------------------
+		// Routes
+		// -------------------------------
 		app.get("/", (req, res) => {
 			//__dirname is the current directory you're in
 			// res.sendFile(__dirname + "/index.html");
@@ -56,6 +66,7 @@ MongoClient.connect(
 				})
 				.catch((error) => console.error(error));
 		});
+
 		app.post("/quotes", (req, res) => {
 			quotesCollection
 				.insertOne(req.body)
@@ -64,9 +75,11 @@ MongoClient.connect(
 				})
 				.catch((error) => console.error(error));
 		});
+
 		app.put("/quotes", (req, res) => {
 			console.log(req.body);
 		});
+
 		app.listen();
 	})
 	.catch((error) => console.error(error));
