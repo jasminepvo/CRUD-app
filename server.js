@@ -49,7 +49,7 @@ MongoClient.connect(
 )
 	.then((client) => {
 		console.log("Connected to Database");
-		// const db = client.db("star-wars-quotes");
+		const db = client.db("star-wars-quotes");
 		// const quotesCollection = db.collection("quotes");
 		// app.use();
 		// app.get();
