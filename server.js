@@ -104,7 +104,9 @@ MongoClient.connect(
 		app.delete("/quotes", (req, res) => {
 			quotesCollection
 				.deleteOne({ name: req.body.name })
-				.then((result) => {})
+				.then((result) => {
+					res.json("Deleted Darth Vader's quote");
+				})
 				.catch((error) => console.error(error));
 		});
 
