@@ -103,7 +103,7 @@ MongoClient.connect(
 		// DELETE
 		app.delete("/quotes", (req, res) => {
 			quotesCollection
-				.deleteOne(query, options)
+				.deleteOne({ name: "Darth Vader" }, options)
 				.then((result) => {})
 				.catch((error) => console.error(error));
 		});
