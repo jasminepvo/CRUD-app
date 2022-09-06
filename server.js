@@ -27,15 +27,6 @@ app.get("/", (req, res) => {
 
 //CREATE
 //Send a POST request through a form
-app.post("/quotes", (req, res) => {
-	quotesCollection
-		.insertOne(req.body)
-		.then((result) => {
-			console.log(result);
-		})
-		.catch((error) => console.error(error));
-});
-
 // app.post("/quotes", (req, res) => {
 // 	console.log(req.body);
 // });
@@ -51,9 +42,19 @@ MongoClient.connect(
 		console.log("Connected to Database");
 		const db = client.db("star-wars-quotes");
 		const quotesCollection = db.collection("quotes");
-		app.use();
-		app.get();
-		app.post();
+		app.use(bodyParser.urlencoded({ extended: true }));
+		app.get("/", (req, res) => {
+			//__dirname is the current directory you're in
+			res.sendFile(__dirname + "/index.html");
+		});
+		app.post("/quotes", (req, res) => {
+			quotesCollection
+				.insertOne(req.body)
+				.then((result) => {
+					res.redirect("/");
+				})
+				.catch((error) => console.error(error));
+		});
 		app.listen();
 	})
 	.catch((error) => console.error(error));
