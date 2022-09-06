@@ -51,9 +51,9 @@ MongoClient.connect(
 		console.log("Connected to Database");
 		const db = client.db("star-wars-quotes");
 		// const quotesCollection = db.collection("quotes");
-		// app.use();
-		// app.get();
-		// app.post();
-		// app.listen();
+		app.use();
+		app.get();
+		app.post();
+		app.listen();
 	})
 	.catch((error) => console.error(error));
