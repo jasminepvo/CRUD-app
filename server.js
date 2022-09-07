@@ -7,9 +7,9 @@ const bodyParser = require("body-parser");
 const app = express();
 
 //create a server that browsers can connect to using listen method
-app.listen(3000, function () {
-	console.log("listening on 3000");
-});
+// app.listen(3000, function () {
+// 	console.log("listening on 3000");
+// });
 
 //Body-parser is middleware, they help to tidy up the request object before we use them
 //Express lets us use middleware with the use method
@@ -31,13 +31,20 @@ app.listen(3000, function () {
 // 	console.log(req.body);
 // });
 
+// -------------------------------
+// Link to Database
+// -------------------------------
+
 //CONNECT TO MONGODB
 const MongoClient = require("mongodb").MongoClient;
 
-MongoClient.connect(
-	"mongodb+srv://yoda:starwars1@cluster0.n5aqihu.mongodb.net/?retryWrites=true&w=majority",
-	{ useUnifiedTopology: true }
-)
+// Updates environment variables
+require("dotenv").config();
+
+// Replace process.env.DB_URL with actual connection string
+const connectionString = process.env.DB_URL;
+
+MongoClient.connect(connectionString, { useUnifiedTopology: true })
 	.then((client) => {
 		console.log("Connected to Database");
 		const db = client.db("star-wars-quotes");
@@ -113,6 +120,13 @@ MongoClient.connect(
 				.catch((error) => console.error(error));
 		});
 
-		app.listen();
+		// -------------------------------
+		// Listen
+		// -------------------------------
+		const isProduction = process.env.NODE_ENV === "production";
+		const port = isProduction ? 7500 : 3000;
+		app.listen(port, function () {
+			console.log(`listening on ${port}`);
+		});
 	})
 	.catch((error) => console.error(error));
