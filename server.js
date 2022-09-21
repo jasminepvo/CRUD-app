@@ -41,11 +41,12 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 		console.log("Connected to Database");
 		const db = client.db("poll");
 		const optionsCollection = db.collection("options");
+		const selectionsCollection = db.collection("selections");
 
 		// -------------------------------
 		// Middlewares
 		// -------------------------------
-		// Tell express we're using ejs as the template engine
+		// Tell Express we're using ejs as the template engine
 		app.set("view engine", "ejs");
 		app.use(bodyParser.urlencoded({ extended: true }));
 		app.use(bodyParser.json());
@@ -54,7 +55,17 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 		// -------------------------------
 		// Routes
 		// -------------------------------
-		// CREATE
+		// CREATE: make form to create poll options + send to db
+		app.post("/options", (req, res) => {
+			optionsCollection
+				.insertOne(req.body)
+				.then((result) => {
+					res.redirect("/");
+				})
+				.catch((error) => console.error(error));
+		});
+
+		// READ: get poll options results from db + show using ejs
 		app.get("/", (req, res) => {
 			db.collection("options")
 				.find()
@@ -65,10 +76,9 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 				.catch((error) => console.error(error));
 		});
 
-		// READ
-		app.post("/options", (req, res) => {
-			console.log(req.body);
-			optionsCollection
+		// CREATE: make form for selection input + send to db
+		app.post("/selections", (req, res) => {
+			selectionsCollection
 				.insertOne(req.body)
 				.then((result) => {
 					res.redirect("/");
@@ -76,11 +86,29 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 				.catch((error) => console.error(error));
 		});
 
+		// READ: get poll results from db
+		app.get("/", (req, res) => {
+			db.collection("selections")
+				.find()
+				.toArray()
+				.then((results) => {
+					res.render("index.ejs", { selections: results });
+				})
+				.catch((error) => console.error(error));
+		});
+
 		// UPDATE
-		app.put("/poll", (req, res) => {});
+		app.put("/options", (req, res) => {});
 
 		// DELETE
-		app.delete("/poll", (req, res) => {});
+		app.delete("/options", (req, res) => {
+			optionsCollection
+				.findOneAndDelete({ _id: req.body })
+				.then((result) => {
+					console.log("Deleted option from poll choices");
+				})
+				.catch((error) => console.error(error));
+		});
 
 		// -------------------------------
 		// Listen
