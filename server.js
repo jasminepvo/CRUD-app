@@ -1,15 +1,7 @@
-//test if node is running properly
-console.log("May Node be with You");
-
-//this is how we use express by requiring express
+// Add connections
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-
-//create a server that browsers can connect to using listen method
-// app.listen(3000, function () {
-// 	console.log("listening on 3000");
-// });
 
 //Body-parser is middleware, they help to tidy up the request object before we use them
 //Express lets us use middleware with the use method
@@ -48,12 +40,12 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 	.then((client) => {
 		console.log("Connected to Database");
 		const db = client.db("poll");
-		const quotesCollection = db.collection("options");
+		const optionsCollection = db.collection("options");
 
 		// -------------------------------
 		// Middlewares
 		// -------------------------------
-		//tell express we're using ejs as the template engine
+		// Tell express we're using ejs as the template engine
 		app.set("view engine", "ejs");
 		app.use(bodyParser.urlencoded({ extended: true }));
 		app.use(bodyParser.json());
@@ -64,20 +56,19 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 		// -------------------------------
 		// CREATE
 		app.get("/", (req, res) => {
-			//__dirname is the current directory you're in
-			// res.sendFile(__dirname + "/index.html");
-			db.collection("quotes")
+			db.collection("options")
 				.find()
 				.toArray()
 				.then((results) => {
-					res.render("index.ejs", { quotes: results });
+					res.render("index.ejs", { options: results });
 				})
 				.catch((error) => console.error(error));
 		});
 
 		// READ
-		app.post("/quotes", (req, res) => {
-			quotesCollection
+		app.post("/options", (req, res) => {
+			console.log(req.body);
+			optionsCollection
 				.insertOne(req.body)
 				.then((result) => {
 					res.redirect("/");
@@ -86,39 +77,10 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 		});
 
 		// UPDATE
-		app.put("/quotes", (req, res) => {
-			quotesCollection
-				.findOneAndUpdate(
-					{ name: "yoda" },
-					{
-						$set: {
-							name: req.body.name,
-							quote: req.body.quote,
-						},
-					},
-					{
-						//upsert = insert document if no documents can be updated so if no yoda quotes exit, create a new darth vader quote
-						upsert: true,
-					}
-				)
-				.then((result) => {
-					res.json("Success");
-				})
-				.catch((error) => console.error(error));
-		});
+		app.put("/poll", (req, res) => {});
 
 		// DELETE
-		app.delete("/quotes", (req, res) => {
-			quotesCollection
-				.deleteOne({ name: req.body.name })
-				.then((result) => {
-					if (result.deletedCount === 0) {
-						return res.json("No quotes to delete");
-					}
-					res.json("Deleted Darth Vader's quote");
-				})
-				.catch((error) => console.error(error));
-		});
+		app.delete("/poll", (req, res) => {});
 
 		// -------------------------------
 		// Listen

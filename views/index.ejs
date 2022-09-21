@@ -13,7 +13,7 @@
 			friends help you.
 		</p>
 
-		<form action="/quotes" method="POST">
+		<form action="/options" method="POST">
 			<input type="text" placeholder="Quick Description" name="description" />
 			<input type="url" placeholder="Add Link" name="link" />
 			<button type="submit">Submit</button>
@@ -22,17 +22,16 @@
 
 		<h2>Poll Options</h2>
 		<!-- Loop through poll options -->
-		<ul class="options">
-			<% for(var i = 0; i < quotes.length; i++) {%>
-			<li class="quote">
-				<!-- Output name from the iterated quote object -->
-				<span><%= quotes[i].name %></span>:
-				<!-- Output quote from the iterated quote object -->
-				<span><%= quotes[i].quote %></span>
-				<span>vote</span>
+		<ol class="options">
+			<% for(var i = 0; i < options.length; i++) {%>
+			<li class="option">
+				<!-- Output description from the iterated poll option object -->
+				<span><%= options[i].description %></span>:
+				<!-- Output link from the iterated poll option object -->
+				<span><%= options[i].link %></span>
 			</li>
 			<% } %>
-		</ul>
+		</ol>
 
 		<script src="/main.js"></script>
 	</body>
