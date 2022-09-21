@@ -47,8 +47,8 @@ const connectionString = process.env.DB_URL;
 MongoClient.connect(connectionString, { useUnifiedTopology: true })
 	.then((client) => {
 		console.log("Connected to Database");
-		const db = client.db("star-wars-quotes");
-		const quotesCollection = db.collection("quotes");
+		const db = client.db("poll");
+		const quotesCollection = db.collection("options");
 
 		// -------------------------------
 		// Middlewares
