@@ -4,11 +4,11 @@
 		<meta charset="UTF-8" />
 		<meta
 			name="description"
-			content="This is a CRUD App with Node and Express"
+			content="This is a Polling App to help make decisions easier"
 		/>
 		<meta name="keywords" content="one, two, three" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>My CRUD App</title>
+		<title>Poll Please</title>
 
 		<!-- external font links -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,12 +29,17 @@
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
-		<h1>May Node and Express be with you</h1>
+		<h1>Are you undecisive? Do you need help making a decision?</h1>
+		<p>
+			Poll Please allows you to add your options, share the link and let your
+			friends help you.
+		</p>
 
 		<form action="/quotes" method="POST">
-			<input type="text" placeholder="name" name="name" />
-			<input type="text" placeholder="quote" name="quote" />
+			<input type="text" placeholder="Quick Description" name="description" />
+			<input type="url" placeholder="Add Link" name="link" />
 			<button type="submit">Submit</button>
+			<button type="delete-button">Delete</button>
 		</form>
 
 		<script type="text/javascript" src="js/main.js"></script>

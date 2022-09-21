@@ -1,15 +1,7 @@
-//test if node is running properly
-console.log("May Node be with You");
-
-//this is how we use express by requiring express
+// Add connections
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-
-//create a server that browsers can connect to using listen method
-// app.listen(3000, function () {
-// 	console.log("listening on 3000");
-// });
 
 //Body-parser is middleware, they help to tidy up the request object before we use them
 //Express lets us use middleware with the use method
@@ -47,13 +39,14 @@ const connectionString = process.env.DB_URL;
 MongoClient.connect(connectionString, { useUnifiedTopology: true })
 	.then((client) => {
 		console.log("Connected to Database");
-		const db = client.db("star-wars-quotes");
-		const quotesCollection = db.collection("quotes");
+		const db = client.db("poll");
+		const optionsCollection = db.collection("options");
+		const selectionsCollection = db.collection("selections");
 
 		// -------------------------------
 		// Middlewares
 		// -------------------------------
-		//tell express we're using ejs as the template engine
+		// Tell Express we're using ejs as the template engine
 		app.set("view engine", "ejs");
 		app.use(bodyParser.urlencoded({ extended: true }));
 		app.use(bodyParser.json());
@@ -62,22 +55,9 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 		// -------------------------------
 		// Routes
 		// -------------------------------
-		// CREATE
-		app.get("/", (req, res) => {
-			//__dirname is the current directory you're in
-			// res.sendFile(__dirname + "/index.html");
-			db.collection("quotes")
-				.find()
-				.toArray()
-				.then((results) => {
-					res.render("index.ejs", { quotes: results });
-				})
-				.catch((error) => console.error(error));
-		});
-
-		// READ
-		app.post("/quotes", (req, res) => {
-			quotesCollection
+		// CREATE: make form to create poll options + send to db
+		app.post("/options", (req, res) => {
+			optionsCollection
 				.insertOne(req.body)
 				.then((result) => {
 					res.redirect("/");
@@ -85,37 +65,47 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 				.catch((error) => console.error(error));
 		});
 
-		// UPDATE
-		app.put("/quotes", (req, res) => {
-			quotesCollection
-				.findOneAndUpdate(
-					{ name: "yoda" },
-					{
-						$set: {
-							name: req.body.name,
-							quote: req.body.quote,
-						},
-					},
-					{
-						//upsert = insert document if no documents can be updated so if no yoda quotes exit, create a new darth vader quote
-						upsert: true,
-					}
-				)
-				.then((result) => {
-					res.json("Success");
+		// READ: get poll options results from db + show using ejs
+		app.get("/", (req, res) => {
+			db.collection("options")
+				.find()
+				.toArray()
+				.then((results) => {
+					res.render("index.ejs", { options: results });
 				})
 				.catch((error) => console.error(error));
 		});
 
-		// DELETE
-		app.delete("/quotes", (req, res) => {
-			quotesCollection
-				.deleteOne({ name: req.body.name })
+		// CREATE: make form for selection input + send to db
+		app.post("/selections", (req, res) => {
+			selectionsCollection
+				.insertOne(req.body)
 				.then((result) => {
-					if (result.deletedCount === 0) {
-						return res.json("No quotes to delete");
-					}
-					res.json("Deleted Darth Vader's quote");
+					res.redirect("/");
+				})
+				.catch((error) => console.error(error));
+		});
+
+		// READ: get poll results from db
+		app.get("/", (req, res) => {
+			db.collection("selections")
+				.find()
+				.toArray()
+				.then((results) => {
+					res.render("index.ejs", { selections: results });
+				})
+				.catch((error) => console.error(error));
+		});
+
+		// UPDATE
+		app.put("/options", (req, res) => {});
+
+		// DELETE
+		app.delete("/options", (req, res) => {
+			optionsCollection
+				.findOneAndDelete({ _id: req.body })
+				.then((result) => {
+					console.log("Deleted option from poll choices");
 				})
 				.catch((error) => console.error(error));
 		});
@@ -126,7 +116,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 		const isProduction = process.env.NODE_ENV === "production";
 		const port = isProduction ? 7500 : 3000;
 		app.listen(port, function () {
-			console.log(`listening on ${port}`);
+			console.log(`Server is running on http://localhost:${port}`);
 		});
 	})
 	.catch((error) => console.error(error));
