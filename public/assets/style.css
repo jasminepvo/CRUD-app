@@ -48,20 +48,52 @@ video {
 body {
 	/* border: 2px solid lightblue; */
 	font-family: var(--font);
+	background-color: var(--main-darkgrey);
+	color: var(--main-white);
+	margin: 0 auto;
+	text-align: center;
 }
 a {
 	text-decoration: none;
+	color: var(--main-grey);
+}
+a:hover {
+	color: var(--main-white);
+	transition: 0.3s ease-in;
+}
+ol {
+	text-align: center;
 }
 li {
-	list-style: none;
+	width: 600px;
+	margin: 0 auto;
+	text-align: left;
 }
+input {
+	text-align: center;
+}
+button {
+	background-color: var(--main-grey);
+	color: var(--main-white);
+	border: none;
+	margin: 5px 10px;
+	padding: 5px 10px;
+	border-radius: 5%;
+	cursor: pointer;
+}
+
 /******************************************
 /* LAYOUT
 /*******************************************/
-header {
+.poll-options,
+.make-selection,
+.poll-results {
+	margin-top: 50px;
 }
 
 footer {
+	position: relative;
+	bottom: -150px;
 }
 
 /******************************************

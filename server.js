@@ -3,25 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 
-//Body-parser is middleware, they help to tidy up the request object before we use them
-//Express lets us use middleware with the use method
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-//handle the get request with the get method
-//app.get(endpoint,callback)
-//endpoint is /
-//callback tells the server what to do when the requested endpoint matches the endpoint stated and takes two objects: request and response
-// app.get("/", (req, res) => {
-// 	//__dirname is the current directory you're in
-// 	res.sendFile(__dirname + "/index.html");
-// });
-//serve up an index.html page back to the browser using sendFile method provided by the res object
-
-//CREATE
-//Send a POST request through a form
-// app.post("/quotes", (req, res) => {
-// 	console.log(req.body);
-// });
+app.use("/public", express.static("public"));
 
 // -------------------------------
 // Link to Database

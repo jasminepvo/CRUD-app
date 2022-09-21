@@ -4,6 +4,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>Poll Please</title>
+		<link rel="stylesheet" href="/public/assets/style.css" type="text/css" />
 	</head>
 
 	<body>
@@ -15,13 +16,13 @@
 
 		<!-- CREATE: make form to create poll options -->
 		<form action="/options" method="POST">
-			<input type="text" placeholder="Quick Description" name="description" />
-			<input type="url" placeholder="Add Link" name="link" />
+			<input type="text" placeholder="Item Description" name="description" />
+			<input type="url" placeholder="Item Link" name="link" />
 			<button type="submit">Submit</button>
 		</form>
 
 		<!-- READ: show poll options -->
-		<h2>Poll Options</h2>
+		<h2 class="poll-options">Poll Options</h2>
 		<ol class="options">
 			<!-- Loop through poll options -->
 			<% for(var i = 0; i < options.length; i++) {%>
@@ -36,29 +37,29 @@
 		</ol>
 
 		<!-- CREATE: make selection -->
-		<h2>Make Your Selection</h2>
+		<h2 class="make-selection">Make Your Selection</h2>
 		<form action="/selections" method="POST">
-			<input
-				type="text"
-				placeholder="Select a number of the option you choose"
-				name="selection"
-			/>
+			<input type="text" placeholder="Select A Number" name="selection" />
 			<button>Submit</button>
 		</form>
 
 		<!-- READ: show poll results -->
-		<h2>Poll Options</h2>
+		<h2 class="poll-results">Poll Results</h2>
 		<ul class="selections">
 			<!-- Loop through poll options -->
 			<% for(var i = 0; i < options.length; i++) {%>
 			<li class="selection">
 				<!-- Output description from the iterated poll option object -->
-				<span><%= options[i].description %></span>:
+				<span><%= options[i].description %></span>: 1
 				<!-- Add instances of how many times that option was selected -->
 				<span class="selectionInstances"></span>
 			</li>
 			<% } %>
 		</ul>
+
+		<footer>
+			Coded with 🤍 by <a href="https://github.com/jasminepvo">Jasmine</a>
+		</footer>
 
 		<!-- UPDATE: update result of the poll -->
 
