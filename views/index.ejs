@@ -3,50 +3,36 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<title>Star Wars Quote App</title>
+		<title>Poll Please</title>
 	</head>
 
 	<body>
-		<h1>May Node and Express be with you.</h1>
+		<h1>Are you undecisive? Do you need help making a decision?</h1>
+		<p>
+			Poll Please allows you to add your options, share the link and let your
+			friends help you.
+		</p>
 
 		<form action="/quotes" method="POST">
-			<input type="text" placeholder="name" name="name" />
-			<input type="text" placeholder="quote" name="quote" />
+			<input type="text" placeholder="Quick Description" name="description" />
+			<input type="url" placeholder="Add Link" name="link" />
 			<button type="submit">Submit</button>
+			<button type="delete-button">Delete</button>
 		</form>
 
-		<h2>Quotes</h2>
-		<!-- Loop through quotes -->
-		<ul class="quotes">
+		<h2>Poll Options</h2>
+		<!-- Loop through poll options -->
+		<ul class="options">
 			<% for(var i = 0; i < quotes.length; i++) {%>
 			<li class="quote">
 				<!-- Output name from the iterated quote object -->
 				<span><%= quotes[i].name %></span>:
 				<!-- Output quote from the iterated quote object -->
 				<span><%= quotes[i].quote %></span>
+				<span>vote</span>
 			</li>
 			<% } %>
 		</ul>
-
-		<!-- Update - Add button to replace quotes -->
-		<div>
-			<h2>Darth Vader invades!</h2>
-			<p>Replace first Yoda's quote with a quote written by Darth Vader</p>
-			<button id="update-button">Replace Yoda's quote</button>
-		</div>
-
-		<!-- Delete - Add button to delete quotes -->
-		<div>
-			<h2>Remove Darth Vader!</h2>
-			<p>
-				Delete one Darth Vader's quote. Does nothing if there are no more Darth
-				Vader's quote
-			</p>
-			<button id="delete-button">Delete Darth Vader's quote</button>
-		</div>
-
-		<!-- Notify users there are no more Darth Vader quotes to delete -->
-		<div id="message"></div>
 
 		<script src="/main.js"></script>
 	</body>
