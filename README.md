@@ -1,24 +1,45 @@
-# My Awesome Project
-Write a short sentence or two about this project and what it does. Be sure to include a link and a screenshot (we're front end devs so we can actually see our work!).
+# Poll Please
+Poll Please was created for all my fellow indecisive decision makers. I personally spent hours or even days before deciding on a purchase. This way, you can enlist the help of your family/friends/peers/strangers to make that decision for you.
 
-**Link to project:** http://recruiters-love-seeing-live-demos.com/
+**Link to project:** http://pollplease.netlify.app
 
-![alt tag](http://placecorgi.com/1200/650)
+![Screen Shot 2022-09-21 at 7 35 49 PM](https://user-images.githubusercontent.com/99847030/191628544-c73b0244-32e4-4c22-b22f-fb4f81084dc5.jpg)
+
 
 ## How It's Made:
 
-**Tech used:** HTML, CSS, JavaScript, Framework of choice
+**Tech used:** HTML, CSS, JavaScript, EJS, Express, Node, MongoDB, Nodemon, Body Parser, Dotenv
 
-Here's where you can go to town on how you actually built this thing. Write as much as you can here, it's totally fine if it's not too much just make sure you write *something*. If you don't have too much experience on your resume working on the front end that's totally fine. This is where you can really show off your passion and make up for that ten fold.
+Step 1: Configure files + set up dependencies using npm install + add required connections <br>
+
+Step 2: Connecting to the database <br>
+1. Open MongoAtlas and create a new project and database 
+2. Create database user with user/pass 
+3. Add IP Address and connect application 
+4. Copy connection string + paste in .env file with correct password
+
+Step 3: Routes for CRUD operations <br>
+1. POST method for user to create poll options + send to database
+2. GET method to get read poll options from database + show to user using EJS
+3. CREATE method for user to make selection input + send to database
+4. READ method to get poll options from database to display for poll results
+5. PUT method to update the poll results of selections
+6. DELETE method for user to delete poll options + update database
+7. LISTEN method to connect to relevant port
+
+Step 4: Frontend work - add html/ejs + basic css styling
+
+Step 5: Make .gitignore to hide relevant files
+
+Make regular commits and push to Github!
 
 ## Optimizations
-*(optional)*
 
-You don't have to include this section but interviewers *love* that you can not only deliver a final product that looks great but also functions efficiently. Did you write something then refactor it later and the result was 5x faster than the original implementation? Did you cache your assets? Things that you write in this section are **GREAT** to bring up in interviews and you can use this section as reference when studying for technical interviews!
+Ideally, I want and plan to remake this in React using re-usable dynamically generated components for each poll option. I am also hoping to find an existing API that automatically generates custom links or possibly use authentication per user. 
 
 ## Lessons Learned:
 
-No matter what your experience level, being an engineer means continuously learning. Every time you build something you always have those *whoa this is awesome* or *fuck yeah I did it!* moments. This is where you should share those moments! Recruiters and interviewers love to see that you're self-aware and passionate about growing.
+This app was built to practice CRUD operations using Express, Node and MongoDB. I spent a lot of time looking through docs/StackOverflow when I got stuck on certain logic pertaining to the following routes or pulling data from the database. I also learned how to link css styles to EJS. 
 
 ## Examples:
 Take a look at these couple examples that I have in my own portfolio:
