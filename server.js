@@ -96,7 +96,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 		// Listen
 		// -------------------------------
 		const isProduction = process.env.NODE_ENV === "production";
-		const port = isProduction ? 7500 : 3000;
+		const PORT = isProduction ? 7500 : 3000;
 		app.listen(PORT, function () {
 			console.log(`Server is running on http://localhost:${PORT}`);
 		});
