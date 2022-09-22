@@ -1,8 +1,8 @@
 # Poll Please
 Poll Please was created for all my fellow indecisive decision makers. I personally spent hours or even days before deciding on a purchase. This way, you can enlist the help of your family/friends/peers/strangers to make that decision for you.
 
-**Link to project:** http://pollplease.netlify.app
-
+**Link to project:** https://pollplease.up.railway.app/
+ 
 ![Screen Shot 2022-09-21 at 7 35 49 PM](https://user-images.githubusercontent.com/99847030/191628544-c73b0244-32e4-4c22-b22f-fb4f81084dc5.jpg)
 
 
